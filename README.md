@@ -2,14 +2,14 @@
 
 ## Overview
 
-This project implements a real-time driver drowsiness detection system using computer vision techniques.  The system analyzes video input from a webcam to identify signs of drowsiness, such as closed eyes and frequent yawning. If drowsiness is detected, an alarm is triggered to alert the driver.  This system aims to prevent accidents caused by driver fatigue.
+This project implements a real-time driver drowsiness detection system using computer vision techniques. The system analyzes video input from a webcam to identify signs of drowsiness, such as closed eyes and frequent yawning. If drowsiness is detected (specifically, if the driver closes their eyes for a span of 15 seconds continuously or yawns 5 or more times frequently), an alarm is triggered to alert the driver. This system aims to prevent accidents caused by driver fatigue.
 
 ## Features
 
 *   **Real-time drowsiness detection:** Continuously monitors the driver's face for signs of fatigue.
-*   **Eye closure detection:**  Utilizes a Convolutional Neural Network (CNN) to detect closed eyes.
-*   **Yawning detection:**  Calculates lip distance to identify yawning.
-*   **Alarm system:**  Triggers an audible alarm when drowsiness is detected.
+*   **Eye closure detection:** Utilizes a Convolutional Neural Network (CNN) to detect closed eyes.
+*   **Yawning detection:** Calculates lip distance to identify yawning.
+*   **Alarm system:** Triggers an audible alarm when drowsiness is detected. The alarm sounds if the driver's eyes are closed long enough to accumulate a drowsiness score exceeding 15 *or* if the driver yawns more than 4 times. The yawn counter is reset after the alarm.
 *   **Score-based drowsiness level:** Accumulates a score based on the frequency and duration of drowsiness indicators.
 *   **Clear visual alerts:** Displays visual warnings on the video feed when drowsiness is detected.
 
@@ -109,11 +109,11 @@ pip install numpy
 ## How it Works
 
 1.  **Face Detection:** The code uses Haar cascades to detect faces in the video frame.
-2.  **Eye Detection:**  Haar cascades are used to detect the left and right eyes within the detected face region.
+2.  **Eye Detection:** Haar cascades are used to detect the left and right eyes within the detected face region.
 3.  **Eye State Classification:** The detected eye regions are fed into a pre-trained CNN model (`cnncat2.h5`) to classify whether the eyes are open or closed.
-4.  **Yawning Detection:**  Facial landmarks are detected using dlib, and the distance between the upper and lower lips is calculated.  A threshold is used to determine if the driver is yawning.
-5.  **Drowsiness Scoring:** A score is incremented when the eyes are closed and decremented when the eyes are open.  The yawn count also contributes to the drowsiness detection.
-6.  **Alarm Trigger:** If the drowsiness score exceeds a threshold or the yawn count is high, an alarm is triggered to alert the driver.
+4.  **Yawning Detection:** Facial landmarks are detected using dlib, and the distance between the upper and lower lips is calculated. A threshold is used to determine if the driver is yawning.
+5.  **Drowsiness Scoring:** A score is incremented when the eyes are closed and decremented when the eyes are open. The yawn count also contributes to the drowsiness detection.
+6.  **Alarm Trigger:** If the drowsiness score exceeds 15 *or* the yawn count exceeds 4, an alarm is triggered to alert the driver. The yawn counter is reset after the alarm.
 
 ## Acknowledgements
 
