@@ -1,0 +1,12 @@
+# Core runtime
+opencv-python>=4.8
+numpy>=1.24
+# Use TensorFlow Keras to avoid standalone Keras version mismatches
+tensorflow>=2.12
+pygame>=2.1
+
+# dlib is platform-specific to build; install via:
+#   pip install dlib
+# or on macOS with brew: brew install dlib
+# If you use conda:
+#   conda install -c conda-forge dlib
